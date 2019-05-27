@@ -14,7 +14,6 @@ internal class RequestInterceptor : Interceptor {
             .build()
 
         val requestBuilder = originalRequest.newBuilder().url(url)
-        Log.d("TEST", "<><> RequestInterceptor, url: " + url.toString())
         val request = requestBuilder.build()
         return chain.proceed(request)
     }

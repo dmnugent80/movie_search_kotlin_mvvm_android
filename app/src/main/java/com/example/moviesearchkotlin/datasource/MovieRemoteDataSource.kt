@@ -14,7 +14,6 @@ class MovieRemoteDataSource
 ) {
 
     fun get(search: String): Single<List<MovieItem>> {
-        Log.d("TEST", "<><> remote data source call getMovies")
         return api.getMovies(search)
             .map { it.mapToDataModel() }
     }

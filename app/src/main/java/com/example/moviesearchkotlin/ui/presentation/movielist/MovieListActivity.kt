@@ -45,7 +45,6 @@ class MovieListActivity : AppCompatActivity() {
         movie_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL ,false)
 
         search_button.setOnClickListener {
-            Log.d("TEST", "<><><> search clicked")
             viewModel.get(search_text.text.toString())
             hideKeyboard()
         }
@@ -58,21 +57,17 @@ class MovieListActivity : AppCompatActivity() {
     }
 
     private fun updateMovies(resource: Resource<List<MovieItem>>?) {
-        Log.d("TEST", "<><><> updateMovies + " + resource?.data?.get(0))
         resource?.let {
             when (it.state) {
                 ResourceState.LOADING -> {
-                    Log.d("TEST", "<><><> Loading")
                     movie_loading_layout.visible()
                     movie_error_layout.gone()
                 }
                 ResourceState.SUCCESS -> {
-                    Log.d("TEST", "<><><> Success")
                     movie_loading_layout.gone()
                     movie_error_layout.gone()
                 }
                 ResourceState.ERROR -> {
-                    Log.d("TEST", "<><><> Error: " + resource.message)
                     movie_loading_layout.gone()
                     movie_error_layout.visible()
                 }
@@ -80,6 +75,7 @@ class MovieListActivity : AppCompatActivity() {
             it.data?.let {
                 adapter = MovieListAdapter(it, itemClick)
                 movie_recycler_view.adapter = adapter
+                // TODO Add items instead of re-initializing the adapter
 //                adapter.addItems(it)
             }
             it.message?.let {
