@@ -23,12 +23,11 @@ class MovieListViewModel
     val movieListData = MutableLiveData<Resource<List<MovieItem>>>()
     private val compositeDisposable = CompositeDisposable()
 
-    fun get() =
+    fun get(search: String) =
         compositeDisposable.add(
-            getMoviesUseCase.execute()
+            getMoviesUseCase.execute(search)
             .doOnSubscribe { movieListData.setLoading() }
             .subscribeOn(Schedulers.io())
-//            .map { it.forEach { it.mapToPresentation() } }
             .subscribe(
                 { movieListData.setSuccess(it) },
                 { movieListData.setError(it.message) }
