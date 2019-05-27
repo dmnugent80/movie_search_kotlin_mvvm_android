@@ -64,10 +64,12 @@ class MovieListActivity : AppCompatActivity() {
                 ResourceState.LOADING -> {
                     Log.d("TEST", "<><><> Loading")
                     movie_loading_layout.visible()
+                    movie_error_layout.gone()
                 }
                 ResourceState.SUCCESS -> {
                     Log.d("TEST", "<><><> Success")
                     movie_loading_layout.gone()
+                    movie_error_layout.gone()
                 }
                 ResourceState.ERROR -> {
                     Log.d("TEST", "<><><> Error: " + resource.message)
