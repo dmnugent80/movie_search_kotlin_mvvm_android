@@ -38,9 +38,5 @@ class MovieListViewModel
         compositeDisposable.dispose()
         super.onCleared()
     }
-
-//    data class State(
-//        val movieList: List<MovieItem>
-//    )
 }
 
