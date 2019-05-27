@@ -31,7 +31,7 @@ class MovieListModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(@NonNull okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(@NonNull okHttpClient: OkHttpClient = provideHttpClient()): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl("http://www.omdbapi.com/")
@@ -41,7 +41,7 @@ class MovieListModule {
     }
 
     @Provides
-    fun provideApiService(@NonNull retrofit: Retrofit): ApiService {
+    fun provideApiService(@NonNull retrofit: Retrofit = provideRetrofit()): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
@@ -64,6 +64,6 @@ class MovieListModule {
     @Provides
     @Singleton
     @Named("movieRemoteDataSource")
-    fun provideMovieRemoteDataSource(): MovieRemoteDataSource = MovieRemoteDataSource(provideApiService(provideRetrofit(provideHttpClient())))
+    fun provideMovieRemoteDataSource(): MovieRemoteDataSource = MovieRemoteDataSource(provideApiService())
 
 }
