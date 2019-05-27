@@ -1,7 +1,8 @@
-package com.example.moviesearchkotlin.ui.presentation.movielist
+package com.example.moviesearchkotlin.common
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.example.moviesearchkotlin.ui.presentation.movielist.MovieListViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module

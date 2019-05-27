@@ -3,13 +3,8 @@ package com.example.moviesearchkotlin.di
 import android.app.Application
 import android.content.Context
 import android.location.LocationManager
-import com.example.moviesearchkotlin.ui.domain.repository.MovieRepository
-import com.example.moviesearchkotlin.ui.domain.usecase.GetMoviesUseCase
-import com.example.moviesearchkotlin.ui.presentation.movielist.MovieListViewModel
-import com.example.moviesearchkotlin.ui.presentation.movielist.MovieListViewModelFactory
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
 import javax.inject.Singleton
 
 /**
