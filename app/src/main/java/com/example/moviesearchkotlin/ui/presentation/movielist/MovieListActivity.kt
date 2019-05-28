@@ -52,7 +52,6 @@ class MovieListActivity : AppCompatActivity() {
 
         movie_recycler_view.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL ,false)
-//            adapter = MovieListAdapter(viewModel.movieListData.value?.data!!, itemClick)
         }
     }
 
