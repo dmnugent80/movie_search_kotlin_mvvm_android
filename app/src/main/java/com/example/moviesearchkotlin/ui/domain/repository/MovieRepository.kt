@@ -9,9 +9,8 @@ import javax.inject.Singleton
 @Singleton
 class MovieRepository
 @Inject constructor(
-    val movieRemoteDataSource: MovieRemoteDataSource
+    private val movieRemoteDataSource: MovieRemoteDataSource
 ) {
-
     fun get(search: String): Single<List<MovieItem>> =
         movieRemoteDataSource.get(search)
 }

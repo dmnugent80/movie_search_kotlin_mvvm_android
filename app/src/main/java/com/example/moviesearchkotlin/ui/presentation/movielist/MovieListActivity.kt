@@ -37,11 +37,6 @@ class MovieListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        movie_recycler_view.apply {
-            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL ,false)
-//            adapter = MovieListAdapter(viewModel.movieListData.value?.data!!, itemClick)
-        }
-
         movie_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL ,false)
 
         search_button.setOnClickListener {
@@ -54,6 +49,11 @@ class MovieListActivity : AppCompatActivity() {
         viewModel.movieListData.observe(this, Observer {
             updateMovies(it)
         })
+
+        movie_recycler_view.apply {
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL ,false)
+//            adapter = MovieListAdapter(viewModel.movieListData.value?.data!!, itemClick)
+        }
     }
 
     private fun updateMovies(resource: Resource<List<MovieItem>>?) {

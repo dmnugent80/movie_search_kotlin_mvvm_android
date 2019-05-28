@@ -25,7 +25,7 @@ class MovieListAdapter constructor(
     override fun onBindViewHolder(holder: MovieHolder, position: Int) =
         holder.bind(movieItems[position], itemClick)
 
-    fun updateMovieList(movieItems:List<MovieItem>){
+    fun updateMovieList(movieItems: List<MovieItem>){
         this.movieItems = movieItems
         notifyDataSetChanged()
     }

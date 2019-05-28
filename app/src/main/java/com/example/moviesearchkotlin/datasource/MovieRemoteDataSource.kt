@@ -1,8 +1,6 @@
 package com.example.moviesearchkotlin.datasource
 
-import android.util.Log
 import com.example.moviesearchkotlin.api.ApiService
-import com.example.moviesearchkotlin.data.response.MovieItemResponse
 import com.example.moviesearchkotlin.data.response.mapToDataModel
 import com.example.moviesearchkotlin.ui.domain.model.MovieItem
 import io.reactivex.Single

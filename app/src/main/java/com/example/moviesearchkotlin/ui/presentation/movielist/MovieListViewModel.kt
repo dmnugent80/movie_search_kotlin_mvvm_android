@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class MovieListViewModel
 @Inject constructor(
-    var getMoviesUseCase: GetMoviesUseCase
+    private val getMoviesUseCase: GetMoviesUseCase
 ) : ViewModel() {
 
     val movieListData = MutableLiveData<Resource<List<MovieItem>>>()
