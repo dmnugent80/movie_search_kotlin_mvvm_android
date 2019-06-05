@@ -25,12 +25,12 @@ class MovieListActivity : AppCompatActivity() {
 
     lateinit var viewModel: MovieListViewModel
 
-    private val itemClick: (MovieItem) -> Unit = {
+    private val itemClick: (MovieItem) -> Unit = { movieItem ->
         // TODO implement click listener
-        Log.d("TEST", "<><> item click")
+        Log.d("TEST", "<><> item click: " + movieItem.movieTitle)
     }
 
-    lateinit var  adapter:  MovieListAdapter
+    var  adapter:  MovieListAdapter = MovieListAdapter(itemClick)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -38,6 +38,7 @@ class MovieListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         movie_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL ,false)
+        movie_recycler_view.adapter = adapter
 
         search_button.setOnClickListener {
             viewModel.get(search_text.text.toString())
@@ -59,26 +60,26 @@ class MovieListActivity : AppCompatActivity() {
         resource?.let {
             when (it.state) {
                 ResourceState.LOADING -> {
+                    movie_recycler_view.gone()
                     movie_loading_layout.visible()
                     movie_error_layout.gone()
                 }
                 ResourceState.SUCCESS -> {
+                    movie_recycler_view.visible()
                     movie_loading_layout.gone()
                     movie_error_layout.gone()
+                    it.data?.let {
+                        adapter.updateMovieList(it)
+                    }
                 }
                 ResourceState.ERROR -> {
+                    movie_recycler_view.gone()
                     movie_loading_layout.gone()
                     movie_error_layout.visible()
+                    it.message?.let {
+//                        snackBar.show()
+                    }
                 }
-            }
-            it.data?.let {
-                adapter = MovieListAdapter(it, itemClick)
-                movie_recycler_view.adapter = adapter
-                // TODO Add items instead of re-initializing the adapter
-//                adapter.addItems(it)
-            }
-            it.message?.let {
-//                snackBar.show()
             }
         }
     }

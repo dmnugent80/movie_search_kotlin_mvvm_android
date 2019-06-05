@@ -35,7 +35,9 @@ class MovieListViewModel
         )
 
     override fun onCleared() {
-        compositeDisposable.dispose()
+        if (!compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
         super.onCleared()
     }
 }

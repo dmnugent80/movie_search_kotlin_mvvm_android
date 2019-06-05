@@ -11,10 +11,10 @@ import com.example.moviesearchkotlin.R
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieListAdapter constructor(
-    private var movieItems : List<MovieItem>,
     private val itemClick: (MovieItem) -> Unit
 ) : RecyclerView.Adapter<MovieListAdapter.MovieHolder>() {
 
+    private var movieItems : List<MovieItem> = listOf()
     override fun getItemCount(): Int = movieItems.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
