@@ -68,8 +68,8 @@ class MovieListActivity : AppCompatActivity() {
                     movie_recycler_view.visible()
                     movie_loading_layout.gone()
                     movie_error_layout.gone()
-                    it.data?.let {
-                        adapter.updateMovieList(it)
+                    it.data?.let { movieList ->
+                        adapter.updateMovieList(movieList)
                     }
                 }
                 ResourceState.ERROR -> {
