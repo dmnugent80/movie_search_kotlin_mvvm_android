@@ -23,7 +23,7 @@
                 android:inputType="text"
                 android:textColor="@color/colorLightText"
                 android:layout_margin="20dp"
-                android:imeOptions="actionDone"
+                android:imeOptions="flagNoExtractUi|actionDone"
         />
 
         <Button
