@@ -46,23 +46,19 @@ class MovieListModule {
     }
 
     @Provides
-    @Singleton
     @Named("movieListViewModel")
     fun provideMovieListViewModel(): MovieListViewModel =
         MovieListViewModel(provideGetMoviesUseCase())
 
     @Provides
-    @Singleton
     @Named("moviesUseCase")
     fun provideGetMoviesUseCase(): GetMoviesUseCase = GetMoviesUseCase(provideMoviesRepository())
 
     @Provides
-    @Singleton
     @Named("moviesRepository")
     fun provideMoviesRepository(): MovieRepository = MovieRepository(provideMovieRemoteDataSource())
 
     @Provides
-    @Singleton
     @Named("movieRemoteDataSource")
     fun provideMovieRemoteDataSource(): MovieRemoteDataSource = MovieRemoteDataSource(provideApiService())
 

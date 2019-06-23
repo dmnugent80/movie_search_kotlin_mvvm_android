@@ -12,9 +12,7 @@ import com.example.moviesearchkotlin.ui.domain.model.MovieItem
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class MovieListViewModel
 @Inject constructor(
     private val getMoviesUseCase: GetMoviesUseCase
