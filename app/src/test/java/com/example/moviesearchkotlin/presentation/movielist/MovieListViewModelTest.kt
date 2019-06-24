@@ -34,7 +34,7 @@ class MovieListViewModelTest {
     }
 
     @Test
-    fun `get post item list succeeds`() {
+    fun `get movie item list succeeds`() {
 
         // given
         whenever(mockGetMoviesUseCase.execute("star wars")).thenReturn(Single.just(movieListStub))
@@ -51,7 +51,7 @@ class MovieListViewModelTest {
     }
 
     @Test
-    fun `get post item list fails`() {
+    fun `get movie item list fails`() {
 
         // given
         whenever(mockGetMoviesUseCase.execute("star wars")).thenReturn(Single.error(throwable))
