@@ -1,5 +1,7 @@
 package com.example.moviesearchkotlin.ui.domain.repository
 
+import android.util.Log
+import com.example.moviesearchkotlin.datasource.local.MovieLocalDataSource
 import com.example.moviesearchkotlin.datasource.remote.MovieRemoteDataSource
 import com.example.moviesearchkotlin.ui.domain.model.MovieItem
 import io.paperdb.Book
@@ -11,14 +13,23 @@ import javax.inject.Singleton
 @Singleton
 class MovieRepository
 @Inject constructor(
-    private val movieRemoteDataSource: MovieRemoteDataSource
+    private val movieRemoteDataSource: MovieRemoteDataSource,
+    private val movieLocalDataSource: MovieLocalDataSource
 ) {
-    fun get(search: String): Single<List<MovieItem>> =
-        movieRemoteDataSource.get(search)
+    fun get(search: String): Single<List<MovieItem>> {
+        val cachedList = movieLocalDataSource.loadCachedList(search)
+        return when {
+            cachedList.isNotEmpty() -> {
+                Log.d("test", "<><><> cached list not empty: " + cachedList)
+                Single.just(cachedList)
+            }
+            else -> {
+                Log.d("test", "<><><> cached list empty, calling get")
+                movieRemoteDataSource.get(search)
+            }
+        }
+    }
 
     fun saveSearchCache(searchString: String, movieList: List<MovieItem>): Book? =
-            Paper.book().write(searchString, movieList)
-
-    fun loadCachedList(searchString: String): List<MovieItem> =
-        Paper.book().read(searchString, arrayListOf())
+        movieLocalDataSource.saveSearchCache(searchString, movieList)
 }

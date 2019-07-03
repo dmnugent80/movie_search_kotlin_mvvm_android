@@ -3,6 +3,7 @@ package com.example.moviesearchkotlin.di
 import android.support.annotation.NonNull
 import com.example.moviesearchkotlin.api.ApiService
 import com.example.moviesearchkotlin.api.RequestInterceptor
+import com.example.moviesearchkotlin.datasource.local.MovieLocalDataSource
 import com.example.moviesearchkotlin.datasource.remote.MovieRemoteDataSource
 import com.example.moviesearchkotlin.ui.domain.repository.MovieRepository
 import com.example.moviesearchkotlin.ui.domain.usecase.GetMoviesUseCase
@@ -62,11 +63,13 @@ class MovieListModule {
     @Named("saveMoviesUseCase")
     fun provideSaveMoviesUseCase(): SaveMoviesUseCase = SaveMoviesUseCase(provideMoviesRepository())
 
-
     @Provides
     @Singleton
     @Named("moviesRepository")
-    fun provideMoviesRepository(): MovieRepository = MovieRepository(provideMovieRemoteDataSource())
+    fun provideMoviesRepository(): MovieRepository = MovieRepository(
+        provideMovieRemoteDataSource(),
+        provideMovieLocalDataSource()
+    )
 
     @Provides
     @Singleton
@@ -74,4 +77,9 @@ class MovieListModule {
     fun provideMovieRemoteDataSource(): MovieRemoteDataSource =
         MovieRemoteDataSource(provideApiService())
 
+    @Provides
+    @Singleton
+    @Named("movieLocalDataSource")
+    fun provideMovieLocalDataSource(): MovieLocalDataSource =
+        MovieLocalDataSource()
 }
