@@ -6,6 +6,7 @@ import com.example.moviesearchkotlin.api.RequestInterceptor
 import com.example.moviesearchkotlin.datasource.remote.MovieRemoteDataSource
 import com.example.moviesearchkotlin.ui.domain.repository.MovieRepository
 import com.example.moviesearchkotlin.ui.domain.usecase.GetMoviesUseCase
+import com.example.moviesearchkotlin.ui.domain.usecase.SaveMoviesUseCase
 import com.example.moviesearchkotlin.ui.presentation.movielist.MovieListViewModel
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import dagger.Module
@@ -48,11 +49,19 @@ class MovieListModule {
     @Provides
     @Named("movieListViewModel")
     fun provideMovieListViewModel(): MovieListViewModel =
-        MovieListViewModel(provideGetMoviesUseCase())
+        MovieListViewModel(
+            provideGetMoviesUseCase(),
+            provideSaveMoviesUseCase()
+        )
 
     @Provides
-    @Named("moviesUseCase")
+    @Named("getMoviesUseCase")
     fun provideGetMoviesUseCase(): GetMoviesUseCase = GetMoviesUseCase(provideMoviesRepository())
+
+    @Provides
+    @Named("saveMoviesUseCase")
+    fun provideSaveMoviesUseCase(): SaveMoviesUseCase = SaveMoviesUseCase(provideMoviesRepository())
+
 
     @Provides
     @Singleton

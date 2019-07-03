@@ -8,6 +8,7 @@ import com.example.moviesearchkotlin.ui.presentation.extensions.setError
 import com.example.moviesearchkotlin.ui.presentation.extensions.setLoading
 import com.example.moviesearchkotlin.ui.presentation.extensions.setSuccess
 import com.example.moviesearchkotlin.ui.domain.model.MovieItem
+import com.example.moviesearchkotlin.ui.domain.usecase.SaveMoviesUseCase
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 class MovieListViewModel
 @Inject constructor(
-    private val getMoviesUseCase: GetMoviesUseCase
+    private val getMoviesUseCase: GetMoviesUseCase,
+    private val saveMoviesUseCase: SaveMoviesUseCase
 ) : ViewModel() {
 
     val movieListData = MutableLiveData<Resource<List<MovieItem>>>()
@@ -27,7 +29,10 @@ class MovieListViewModel
             .doOnSubscribe { movieListData.setLoading() }
             .subscribeOn(Schedulers.io())
             .subscribe(
-                { movieListData.setSuccess(it) },
+                {
+                    movieListData.setSuccess(it)
+                    saveMoviesUseCase.saveResult(search, it)
+                },
                 { movieListData.setError(it.message) }
             )
         )
