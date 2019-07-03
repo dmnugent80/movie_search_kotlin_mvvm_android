@@ -1,6 +1,5 @@
 package com.example.moviesearchkotlin.datasource.local
 
-import com.example.moviesearchkotlin.api.ApiService
 import com.example.moviesearchkotlin.ui.domain.model.MovieItem
 import io.paperdb.Book
 import io.paperdb.Paper
