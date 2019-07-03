@@ -3,7 +3,7 @@ package com.example.moviesearchkotlin.di
 import android.support.annotation.NonNull
 import com.example.moviesearchkotlin.api.ApiService
 import com.example.moviesearchkotlin.api.RequestInterceptor
-import com.example.moviesearchkotlin.datasource.MovieRemoteDataSource
+import com.example.moviesearchkotlin.datasource.remote.MovieRemoteDataSource
 import com.example.moviesearchkotlin.ui.domain.repository.MovieRepository
 import com.example.moviesearchkotlin.ui.domain.usecase.GetMoviesUseCase
 import com.example.moviesearchkotlin.ui.presentation.movielist.MovieListViewModel
@@ -60,6 +60,7 @@ class MovieListModule {
 
     @Provides
     @Named("movieRemoteDataSource")
-    fun provideMovieRemoteDataSource(): MovieRemoteDataSource = MovieRemoteDataSource(provideApiService())
+    fun provideMovieRemoteDataSource(): MovieRemoteDataSource =
+        MovieRemoteDataSource(provideApiService())
 
 }

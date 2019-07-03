@@ -1,6 +1,6 @@
 package com.example.moviesearchkotlin.ui.domain.repository
 
-import com.example.moviesearchkotlin.datasource.MovieRemoteDataSource
+import com.example.moviesearchkotlin.datasource.remote.MovieRemoteDataSource
 import com.example.moviesearchkotlin.ui.domain.model.MovieItem
 import io.reactivex.Single
 import javax.inject.Inject

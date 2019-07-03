@@ -1,4 +1,4 @@
-package com.example.moviesearchkotlin.datasource
+package com.example.moviesearchkotlin.datasource.remote
 
 import com.example.moviesearchkotlin.api.ApiService
 import com.example.moviesearchkotlin.data.response.mapToDataModel
