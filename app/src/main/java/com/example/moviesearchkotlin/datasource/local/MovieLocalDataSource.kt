@@ -14,5 +14,5 @@ class MovieLocalDataSource
         Paper.book().write(searchString, movieList)
 
     fun loadCachedList(searchString: String): List<MovieItem> =
-        Paper.book().read(searchString, arrayListOf())
+        Paper.book().read(searchString, listOf())
 }
