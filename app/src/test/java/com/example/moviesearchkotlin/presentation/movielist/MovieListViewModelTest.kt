@@ -3,6 +3,7 @@ package com.example.moviesearchkotlin.presentation.movielist
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.moviesearchkotlin.movieItemStub
 import com.example.moviesearchkotlin.ui.domain.usecase.GetMoviesUseCase
+import com.example.moviesearchkotlin.ui.domain.usecase.SaveMoviesUseCase
 import com.example.moviesearchkotlin.ui.presentation.movielist.MovieListViewModel
 import com.example.moviesearchkotlin.ui.presentation.state.Resource
 import com.example.moviesearchkotlin.ui.presentation.state.ResourceState
@@ -20,6 +21,7 @@ class MovieListViewModelTest {
     private lateinit var movieListViewModel: MovieListViewModel
 
     private val mockGetMoviesUseCase: GetMoviesUseCase = mock()
+    private val mockSaveMoviesUseCase: SaveMoviesUseCase = mock()
 
     private val movieListStub = listOf(movieItemStub)
     private val throwable = Throwable()
@@ -30,7 +32,7 @@ class MovieListViewModelTest {
 
     @Before
     fun setUp() {
-        movieListViewModel = MovieListViewModel(mockGetMoviesUseCase)
+        movieListViewModel = MovieListViewModel(mockGetMoviesUseCase, mockSaveMoviesUseCase)
     }
 
     @Test
