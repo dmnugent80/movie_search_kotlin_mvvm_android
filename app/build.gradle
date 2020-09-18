@@ -5,6 +5,10 @@ apply plugin: 'kotlin-kapt'
 
 kapt { generateStubs = true }
 
+androidExtensions {
+    experimental = true
+}
+
 buildscript {
     repositories {
         jcenter()
