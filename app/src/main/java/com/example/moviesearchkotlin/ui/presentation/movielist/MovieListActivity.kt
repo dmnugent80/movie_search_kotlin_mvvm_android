@@ -12,6 +12,7 @@ import com.example.moviesearchkotlin.ui.domain.model.MovieItem
 import com.example.moviesearchkotlin.ui.presentation.extensions.gone
 import com.example.moviesearchkotlin.ui.presentation.extensions.hideKeyboard
 import com.example.moviesearchkotlin.ui.presentation.extensions.visible
+import com.example.moviesearchkotlin.ui.presentation.moviedetail.MovieDetailDialogFragment
 import com.example.moviesearchkotlin.ui.presentation.state.Resource
 import com.example.moviesearchkotlin.ui.presentation.state.ResourceState
 import dagger.android.AndroidInjection
@@ -28,6 +29,11 @@ class MovieListActivity : AppCompatActivity() {
     private val itemClick: (MovieItem) -> Unit = { movieItem ->
         // TODO implement click listener
         Log.d("TEST", "<><> item click: " + movieItem.movieTitle)
+        val fragmentTransaction = supportFragmentManager?.beginTransaction()
+        fragmentTransaction?.let { ft ->
+            val movieDetailFragment = MovieDetailDialogFragment.newInstance(movieItem)
+            movieDetailFragment.show(ft, "dialog")
+        }
     }
 
     var  adapter:  MovieListAdapter = MovieListAdapter(itemClick)
