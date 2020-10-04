@@ -33,7 +33,7 @@ class MovieDetailDialogFragment : AppCompatDialogFragment() {
     fun initViews(view: View) {
         movie?.let { m ->
             view.movie_title_txt.text = m.movieTitle
-            view.id_txt.text = m.movieId
+            view.plot.text = m.moviePlot
 
             context?.let { c ->
                 Glide.with(c)

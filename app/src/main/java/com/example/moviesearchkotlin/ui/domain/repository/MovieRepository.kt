@@ -5,6 +5,7 @@ import com.example.moviesearchkotlin.datasource.local.MovieLocalDataSource
 import com.example.moviesearchkotlin.datasource.remote.MovieRemoteDataSource
 import com.example.moviesearchkotlin.ui.domain.model.MovieItem
 import io.paperdb.Book
+import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -24,10 +25,12 @@ class MovieRepository
             }
             else -> {
                 Log.d("test", "<><><> cached list empty, calling get")
-                movieRemoteDataSource.get(search)
+                movieRemoteDataSource.getMovies(search)
             }
         }
     }
+
+    fun getMovie(movieId: String): Observable<MovieItem> =  movieRemoteDataSource.getMovie(movieId)
 
     fun saveSearchCache(searchString: String, movieList: List<MovieItem>): Book? =
         movieLocalDataSource.saveSearchCache(searchString, movieList)

@@ -26,15 +26,23 @@ class MovieListViewModel
     fun get(search: String) =
         compositeDisposable.add(
             getMoviesUseCase.execute(search)
-            .doOnSubscribe { movieListData.setLoading() }
-            .subscribeOn(Schedulers.io())
-            .subscribe(
-                {
-                    movieListData.setSuccess(it)
-                    saveMoviesUseCase.saveResult(search, it)
-                },
-                { movieListData.setError(it.message) }
-            )
+                .doOnSubscribe { movieListData.setLoading() }
+                .subscribeOn(Schedulers.io())
+                .toObservable()
+                .flatMapIterable {
+                    it
+                }
+                .flatMap { movieItem ->
+                    getMoviesUseCase.getMovie(movieItem.movieId)
+                }
+                .toList()
+                .subscribe(
+                    {
+                        movieListData.setSuccess(it)
+                        saveMoviesUseCase.saveResult(search, it)
+                    },
+                    { movieListData.setError(it.message) }
+                )
         )
 
     override fun onCleared() {

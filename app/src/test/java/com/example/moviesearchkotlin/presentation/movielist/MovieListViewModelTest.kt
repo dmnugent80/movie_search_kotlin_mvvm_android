@@ -11,6 +11,9 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -33,6 +36,9 @@ class MovieListViewModelTest {
     @Before
     fun setUp() {
         movieListViewModel = MovieListViewModel(mockGetMoviesUseCase, mockSaveMoviesUseCase)
+
+        RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
     }
 
     @Test

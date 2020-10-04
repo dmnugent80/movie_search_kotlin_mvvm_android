@@ -8,5 +8,7 @@ data class MovieItem(
     val movieId: String,
     val moviePosterUrl: String,
     val movieTitle: String,
-    val movieYear: String
+    val movieYear: String,
+    val moviePlot: String,
+    val movieDirector: String
 ) : Parcelable

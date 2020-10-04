@@ -33,7 +33,8 @@ class MovieListAdapter constructor(
     inner class MovieHolder (view: View) : RecyclerView.ViewHolder(view) {
         fun bind(movieItem: MovieItem, clickListener: (MovieItem) -> Unit) {
             itemView.tv_title.text = movieItem.movieTitle
-            itemView.tv_id.text = movieItem.movieId
+            itemView.tv_director.text = movieItem.movieDirector
+            itemView.tv_year.text = movieItem.movieYear
             Glide.with(itemView.context)
                 .load(movieItems[position].moviePosterUrl)
                 .into(itemView.iv_logo)
